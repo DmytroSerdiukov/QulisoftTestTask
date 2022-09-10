@@ -1,10 +1,11 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {PhotosAPI} from '../../api';
 
-const fetchPhotos = createAsyncThunk(
+export const fetchPhotos = createAsyncThunk(
   'photos/fetchPhotos',
   async (_, thunkAPI) => {
     const response = await PhotosAPI.fetchPhotos();
+    return response;
   },
 );
 
@@ -13,21 +14,33 @@ interface InitState {
   error: any;
 }
 
-const initState: InitState = {
+interface IAction {
+  payload?: any;
+}
+
+const initState = {
   photos: [],
   error: null,
 };
 
 export const photoSlice = createSlice({
   name: 'photos',
-  initialState: initState,
+  initialState: initState as InitState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchPhotos.pending, (state, action) => {}),
-      builder.addCase(fetchPhotos.fulfilled, (state, action) => {
-        state.photos = [...action.payload];
-      }),
-      builder.addCase(fetchPhotos.rejected, (state, action) => {});
+    builder.addCase(
+      fetchPhotos.fulfilled,
+      (state: InitState, action: IAction) => {
+        const data = JSON.parse(JSON.stringify(action.payload));
+        state.photos = data;
+      },
+    ),
+      builder.addCase(
+        fetchPhotos.rejected,
+        (state: InitState, action: IAction) => {
+          state.error = 'Something went wrong';
+        },
+      );
   },
 });
 
