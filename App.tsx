@@ -26,11 +26,12 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import MainContainer from './app/screens/Main/container';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <Text>d22222222222222</Text>
+      <MainContainer />
     </SafeAreaView>
   );
 };
