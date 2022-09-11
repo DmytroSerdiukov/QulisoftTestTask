@@ -5,40 +5,44 @@ import {
   Text,
   View,
   TouchableOpacity,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
+} from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native'
 
 interface IProps {
-  photos: PhotoProps[];
+  photos: PhotoProps[]
 }
 
 type PhotoProps = {
-  id: string;
-  name: string;
-  small: string;
-};
+  id: string
+  name: string
+  small: string
+  user: any
+  urls: any
+}
 
-const MainMarkup: React.FC<IProps> = ({photos}) => {
-  const navigation = useNavigation();
+const MainMarkup: React.FC<IProps> = ({ photos }) => {
+  const navigation = useNavigation<any>()
   const onButtonClick = (id: string, url: string) => {
-    navigation.navigate('Photo', {id: id, url: url});
-  };
+    navigation.navigate('Photo', { id: id, url: url })
+  }
 
   if (photos)
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
-          {photos.photos.map((el: PhotoProps) => (
+          {photos.map((el: PhotoProps) => (
             <TouchableOpacity
               key={el.id}
-              onPress={() => onButtonClick(el.id, el.urls.small)}>
+              onPress={() => onButtonClick(el.id, el.urls.small)}
+            >
               <Text style={styles.headerPhotoText}>{el.user.username}</Text>
               <View style={styles.item}>
                 <Image
                   style={styles.img}
-                  source={{uri: el.urls.small}}
+                  source={{ uri: el.urls.small }}
                   resizeMode={'cover'}
+                  resizeMethod={'resize'}
                 />
                 <Text style={styles.text}>{el.user.name}</Text>
               </View>
@@ -46,17 +50,17 @@ const MainMarkup: React.FC<IProps> = ({photos}) => {
           ))}
         </ScrollView>
       </SafeAreaView>
-    );
+    )
   else {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Loading...</Text>
       </View>
-    );
+    )
   }
-};
+}
 
-export default MainMarkup;
+export default MainMarkup
 
 const styles = StyleSheet.create({
   container: {
@@ -96,4 +100,4 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#000',
   },
-});
+})

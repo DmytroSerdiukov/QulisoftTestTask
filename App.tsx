@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
+import React, { type PropsWithChildren } from 'react'
 import {
   SafeAreaView,
   ScrollView,
@@ -17,7 +17,7 @@ import {
   Text,
   useColorScheme,
   View,
-} from 'react-native';
+} from 'react-native'
 
 import {
   Colors,
@@ -25,15 +25,15 @@ import {
   Header,
   LearnMoreLinks,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import MainContainer from './app/screens/Main/container';
+} from 'react-native/Libraries/NewAppScreen'
+import MainContainer from './app/screens/Main/container'
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Photo from './app/screens/Photo';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Photo from './app/screens/Photo'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const App = () => {
   return (
@@ -45,8 +45,8 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
-});
+})
 
-export default App;
+export default App

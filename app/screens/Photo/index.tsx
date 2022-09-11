@@ -1,26 +1,26 @@
-import {View, Image, Button, Text, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
+import { View, Image, Button, Text, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native'
 
 type PhotoProps = {
-  route: any;
-};
-const Photo: React.FC<PhotoProps> = ({route}) => {
-  const {id, url} = route.params;
+  route: any
+}
+const Photo: React.FC<PhotoProps> = ({ route }) => {
+  const { id, url } = route.params
 
   return (
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.img}
-        source={{uri: url}}
+        source={{ uri: url }}
         resizeMode={'cover'}
         resizeMethod={'resize'}
       />
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default Photo;
+export default Photo
 
 const styles = StyleSheet.create({
   container: {
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'gray',
   },
-});
+})

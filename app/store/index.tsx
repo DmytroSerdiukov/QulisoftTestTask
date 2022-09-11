@@ -1,14 +1,14 @@
-import {configureStore} from '@reduxjs/toolkit';
-import photoSlice from './reducers/photos';
+import { configureStore } from '@reduxjs/toolkit'
+import photoSlice from './reducers/photos'
 
 const store = configureStore({
   reducer: {
     photos: photoSlice,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-});
+})
 
-export default store;
+export default store
