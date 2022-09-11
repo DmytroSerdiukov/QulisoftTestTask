@@ -1,13 +1,7 @@
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useNavigation } from '@react-navigation/native'
+import PhotoCard from '../../components/PhotoCard'
+import useDeviceWidth from '../../hooks/useDeviceWidth'
 
 interface IProps {
   photos: PhotoProps[]
@@ -22,31 +16,16 @@ type PhotoProps = {
 }
 
 const MainMarkup: React.FC<IProps> = ({ photos }) => {
-  const navigation = useNavigation<any>()
-  const onButtonClick = (id: string, url: string) => {
-    navigation.navigate('Photo', { id: id, url: url })
-  }
+  const { cardWidth } = useDeviceWidth()
 
-  if (photos)
+  if (photos !== null)
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView>
+        <ScrollView
+          style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+        >
           {photos.map((el: PhotoProps) => (
-            <TouchableOpacity
-              key={el.id}
-              onPress={() => onButtonClick(el.id, el.urls.small)}
-            >
-              <Text style={styles.headerPhotoText}>{el.user.username}</Text>
-              <View style={styles.item}>
-                <Image
-                  style={styles.img}
-                  source={{ uri: el.urls.small }}
-                  resizeMode={'cover'}
-                  resizeMethod={'resize'}
-                />
-                <Text style={styles.text}>{el.user.name}</Text>
-              </View>
-            </TouchableOpacity>
+            <PhotoCard cardWidth={cardWidth} key={el.id} {...el} />
           ))}
         </ScrollView>
       </SafeAreaView>
@@ -88,7 +67,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: 350,
     height: 230,
     backgroundColor: 'gray',
     borderRadius: 8,
