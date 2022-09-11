@@ -1,6 +1,5 @@
-import { View, Image, Button, Text, StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useNavigation } from '@react-navigation/native'
 
 type PhotoProps = {
   route: any

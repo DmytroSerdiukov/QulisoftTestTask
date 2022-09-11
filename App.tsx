@@ -1,12 +1,10 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-
-import MainContainer from './app/screens/Main/container'
-
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Photo from './app/screens/Photo'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import MainContainer from './app/screens/Main/container'
+import Photo from './app/screens/Photo'
 
 const Stack = createNativeStackNavigator()
 
