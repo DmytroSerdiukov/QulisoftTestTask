@@ -6,6 +6,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 interface IProps {
   photos: PhotoProps[];
@@ -18,16 +20,20 @@ type PhotoProps = {
 };
 
 const MainMarkup: React.FC<IProps> = ({photos}) => {
+  const navigation = useNavigation();
+  const onButtonClick = (id: string, url: string) => {
+    navigation.navigate('Photo', {id: id, url: url});
+  };
+
   if (photos)
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ScrollView>
           {photos.photos.map((el: PhotoProps) => (
             <TouchableOpacity
               key={el.id}
-              onPress={() => {
-                alert('pressed');
-              }}>
+              onPress={() => onButtonClick(el.id, el.urls.small)}>
+              <Text style={styles.headerPhotoText}>{el.user.username}</Text>
               <View style={styles.item}>
                 <Image
                   style={styles.img}
@@ -39,7 +45,7 @@ const MainMarkup: React.FC<IProps> = ({photos}) => {
             </TouchableOpacity>
           ))}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   else {
     return (
@@ -66,6 +72,12 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     color: '#fff',
+  },
+  headerPhotoText: {
+    backgroundColor: '#000',
+    color: '#fff',
+    padding: 10,
+    fontSize: 25,
   },
   item: {
     position: 'relative',

@@ -28,11 +28,23 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import MainContainer from './app/screens/Main/container';
 
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Photo from './app/screens/Photo';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
+const Stack = createNativeStackNavigator();
+
 const App = () => {
   return (
-    <SafeAreaView>
-      <MainContainer />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Main">
+          <Stack.Screen name="Main" component={MainContainer} />
+          <Stack.Screen name="Photo" component={Photo} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
